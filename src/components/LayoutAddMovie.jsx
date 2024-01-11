@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import Movies from '../Movies';
 
-const LayoutAddMovie = () => {
-    const newId = Movies.length > 0 ? Movies[Movies.length - 1].id + 1 : 1;
+const LayoutAddMovie = ({ movies, setMovies }) => {
+    const newId = movies.length > 0 ? movies[movies.length - 1].id + 1 : 1;
     const [id, setId] = useState(newId);
     const [title, setTitle] = useState('');
     const [posterUrl, setPosterUrl] = useState('');
     const [description, setDescription] = useState('');
-    const [rating, setRating] = useState('');
+    const [rating, setRating] = useState(0);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,24 +19,25 @@ const LayoutAddMovie = () => {
         posterUrl,
         description,
         rating,
-    };
+        };
 
-        // Ajout du nouveau film au tableau Movies
-        Movies.push(formData);
-        console.log(formData);
+        // Ajout du nouveau film au tableau Movies (create a new array)
+        const newListMovies = [...movies, formData];
+        setMovies(newListMovies);
+
         // Réinitialisation des valeurs des champs après la soumission
         setId(id + 1); // Incrémentation de l'ID pour le prochain film
         setTitle('');
         setPosterUrl('');
         setDescription('');
-        setRating('');
+        setRating(0); // Initialize with a number, not an empty string
     };
 
     return (
         <div className='container-fluid p-4 bg-danger'>
         <Container className='text-white'>
             <h1>Ajouter un Film, une série ou une émission</h1>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Group className="mb-3" controlId="formGroupTitle">
                 <Form.Label>Titre</Form.Label>
                 <Form.Control
@@ -68,7 +68,9 @@ const LayoutAddMovie = () => {
             <Form.Group className="mb-3" controlId="formGroupRating">
                 <Form.Label>Note</Form.Label>
                 <Form.Control
-                type="text"
+                type="number"
+                max={10}
+                min={0}
                 placeholder="0"
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}

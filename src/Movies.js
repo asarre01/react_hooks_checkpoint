@@ -38,7 +38,7 @@ const Movies = [
         "posterURL" : "https://fr.web.img4.acsta.net/c_310_420/pictures/15/04/09/12/38/163148.jpg", 
         "rating" : 10
 
-    },
+    }
 ]
 
 export default Movies;
