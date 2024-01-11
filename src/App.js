@@ -1,8 +1,8 @@
 import { useState } from "react";
-import LayoutAddMovie from "./components/LayoutAddMovie";
 import MovieList from "./components/MovieList";
 import NavBarCine from "./components/NavBarCine";
 import Movies from "./Movies";
+import LayoutAddMovie from "./components/LayoutAddMovie";
 
 function App() {
 	const [movies, setMovies] = useState(Movies);
@@ -21,7 +21,7 @@ function App() {
 		<div className="App">
 		<NavBarCine onFilterChange={handleFilterChange} movies={movies} />
 		<MovieList movies={movies} filter={filter} />
-		<LayoutAddMovie movies={movies} setMovies={setMovies} />
+		<LayoutAddMovie movies={movies} setMovies={setMovies}/>
 		</div>
 	);
 }

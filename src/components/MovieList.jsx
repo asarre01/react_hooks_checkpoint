@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import MovieCard from './MovieCard';
+import Nodata from './Nodata';
 
 const MovieList = ({ movies, filter }) => {
     const [filteredMovies, setFilteredMovies] = useState(movies);
 
     useEffect(() => {
-        // Filter movies based on title and/or rating when filter changes
         const filtered = movies.filter(
         (movie) =>
             movie.title.toLowerCase().includes(filter.title.toLowerCase()) &&
@@ -14,11 +14,14 @@ const MovieList = ({ movies, filter }) => {
         setFilteredMovies(filtered);
     }, [movies, filter]);
 
+    let isEmpty = false;
+    
+    if (filteredMovies.length !== 0) {
+        isEmpty = true;
+    }
     return (
-        <div className="movie-list d-flex flex-wrap ">
-        {filteredMovies.map((movie) => (
-            <MovieCard key={movie.id} {...movie} />
-        ))}
+        <div style={{ minHeight: '47rem' }} className=" d-flex flex-wrap ">
+        { isEmpty ? filteredMovies.map((movie) => (<MovieCard key={movie.id} {...movie} />)) : <Nodata/>}
         </div>
     );
 };

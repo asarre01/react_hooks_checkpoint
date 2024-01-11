@@ -11,7 +11,6 @@ export default function MovieCard({ id, title, description, posterURL, rating })
             src={posterURL !== '' ? posterURL : "noImage.png"}
             alt={`Poster for ${title}`} 
             />
-            {console.log(posterURL)}
         </Card.Header>
         <Card.Body>
             <Card.Title className='d-flex justify-content-between align-items-center'>
